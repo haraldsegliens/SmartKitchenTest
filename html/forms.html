@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-100">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Kitchen Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-full">
+<!--
+  This example requires updating your template:
+
+  ```
+  <html class="h-full bg-gray-100">
+  <body class="h-full">
+  ```
+-->
+<div class="min-h-full">
+  <nav class="bg-gray-800">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+          </div>
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-4">
+              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+              <a href="/" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Main</a>
+              <a href="/forms" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Forms</a>
+              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Settings</a>
+            </div>
+          </div>
+        </div>
+        <div class="-mr-2 flex md:hidden">
+          <!-- Mobile menu button -->
+          <button type="button" class="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" aria-controls="mobile-menu" aria-expanded="false">
+            <span class="absolute -inset-0.5"></span>
+            <span class="sr-only">Open main menu</span>
+            <!-- Menu open: "hidden", Menu closed: "block" -->
+            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+            <!-- Menu open: "block", Menu closed: "hidden" -->
+            <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile menu, show/hide based on menu state. -->
+    <div class="md:hidden" id="mobile-menu">
+      <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
+        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+        <a href="/" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Main</a>
+        <a href="/forms" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Forms</a>
+        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Settings</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="bg-white shadow">
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Forms</h1>
+    </div>
+  </header>
+
+  <main>
+    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+
+      <div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+        <ul class="flex flex-wrap -mb-px" id="forms-tabs">
+        </ul>
+      </div>
+
+      <div id="form-data-table" class="flex flex-col hidden py-6">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+            <div class="overflow-hidden">
+              <table class="min-w-full text-left font-light">
+                <thead class="border-b font-medium dark:border-neutral-500">
+                  <tr id="form-data-table-header">
+                    <th scope="col" class="px-6 py-4">#</th>
+                    <th scope="col" class="px-6 py-4">First</th>
+                    <th scope="col" class="px-6 py-4">Last</th>
+                    <th scope="col" class="px-6 py-4">Handle</th>
+                  </tr>
+                </thead>
+                <tbody id="form-data-table-body">
+                  <tr class="border-b dark:border-neutral-500">
+                    <td class="whitespace-nowrap px-6 py-4">1</td>
+                    <td class="whitespace-nowrap px-6 py-4">Mark</td>
+                    <td class="whitespace-nowrap px-6 py-4">Otto</td>
+                    <td class="whitespace-nowrap px-6 py-4">@mdo</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p id="form-data-table-no-data-sign" class="text-center font-light py-4 hidden">No data</p>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<template id="forms-tabs-template-not-selected">
+  <li class="mr-2">
+    <a href="" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"></a>
+  </li>
+</template>
+
+<template id="forms-tabs-template-selected">
+  <li class="mr-2">
+    <a href="" class="inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500" aria-current="page"></a>
+  </li>
+</template>
+
+
+<template id="form-data-table-template-header-cell">
+  <th scope="col" class="px-6 py-4">#</th>
+</template>
+
+<template id="form-data-table-body-template-row">
+  <tr class="border-b dark:border-neutral-500">
+  </tr>
+</template>
+
+<template id="form-data-table-body-template-row-cell">
+  <td class="whitespace-nowrap px-6 py-4">1</td>
+</template>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  let formParam = urlParams.get('form');
+  if(!formParam) {
+    formParam = 0;
+  } else {
+    formParam = parseInt(formParam);
+  }
+
+  loadFormsTabs(formParam);
+  loadFormDataTable(formParam);
+
+  async function loadFormsTabs(selectedFormIndex) {
+    let forms = await getJson("/data/forms")
+    
+    let formsTabs = document.getElementById("forms-tabs");
+    formsTabs.innerHTML = '';
+
+    let formsTabsTemplateNotSelected = document.getElementById("forms-tabs-template-not-selected");
+    let formsTabsTemplateSelected = document.getElementById("forms-tabs-template-selected");
+    
+    let index = 0;
+    for(let form of forms) {
+      let clone;
+      if(index === selectedFormIndex) {
+        clone = formsTabsTemplateSelected.content.cloneNode(true);
+      } else {
+        clone = formsTabsTemplateNotSelected.content.cloneNode(true);
+      }
+      clone.children[0].children[0].setAttribute('href', "/forms?form=" + index);
+      clone.children[0].children[0].innerHTML = form;
+      formsTabs.appendChild(clone);
+      index++;
+    }
+  }
+
+  async function loadFormDataTable(selectedFormIndex) {
+    let response = await getJson("/data/forms/" + selectedFormIndex)
+
+    document.getElementById("form-data-table").classList.remove('hidden');
+      
+    let tableHeader = document.getElementById("form-data-table-header");
+    tableHeader.innerHTML = '';
+
+    let tableBody = document.getElementById("form-data-table-body");
+    tableBody.innerHTML = '';
+
+    let tableTemplateHeaderCell = document.getElementById("form-data-table-template-header-cell");
+    let tableBodyTemplateRow = document.getElementById("form-data-table-body-template-row");
+    let tableBodyTemplateRowCell = document.getElementById("form-data-table-body-template-row-cell");
+
+    for (let column of response.columns) {
+      const clone = tableTemplateHeaderCell.content.cloneNode(true);
+      clone.children[0].innerHTML = column;
+      tableHeader.appendChild(clone);
+    }
+    
+    if(response.records.length === 0) {
+      document.getElementById("form-data-table-no-data-sign").classList.remove('hidden');
+    } else {
+      document.getElementById("form-data-table-no-data-sign").classList.add('hidden');
+
+      for(let record of response.records) {
+        const clone1 = tableBodyTemplateRow.content.cloneNode(true);
+        for ([key, value] of Object.entries(record)) {
+          const clone2 = tableBodyTemplateRowCell.content.cloneNode(true);
+          clone2.children[0].innerHTML = value;
+          clone1.children[0].appendChild(clone2);
+        }
+        tableBody.appendChild(clone1);
+      }
+    }
+  
+  }
+
+  async function getJson(url) {
+    let fetchOptions = {
+      method: "GET"
+    };
+
+    let res = await fetch(url, fetchOptions);
+
+    if (!res.ok) {
+        let error = await res.text();
+        throw new Error(error);
+    }
+
+    return res.json();
+  }
+</script>
+</body>
+</html>

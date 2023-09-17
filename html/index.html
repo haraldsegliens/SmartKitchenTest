@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-100">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Kitchen Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-full">
+<!--
+  This example requires updating your template:
+
+  ```
+  <html class="h-full bg-gray-100">
+  <body class="h-full">
+  ```
+-->
+<div class="min-h-full">
+  <nav class="bg-gray-800">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+          </div>
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-4">
+              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+              <a href="/" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Main</a>
+              <a href="/forms" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Forms</a>
+              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Settings</a>
+            </div>
+          </div>
+        </div>
+        <div class="-mr-2 flex md:hidden">
+          <!-- Mobile menu button -->
+          <button type="button" class="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" aria-controls="mobile-menu" aria-expanded="false">
+            <span class="absolute -inset-0.5"></span>
+            <span class="sr-only">Open main menu</span>
+            <!-- Menu open: "hidden", Menu closed: "block" -->
+            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+            <!-- Menu open: "block", Menu closed: "hidden" -->
+            <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile menu, show/hide based on menu state. -->
+    <div class="md:hidden" id="mobile-menu">
+      <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
+        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+        <a href="/" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Main</a>
+        <a href="/forms" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Forms</a>
+        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Settings</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="bg-white shadow">
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Main</h1>
+    </div>
+  </header>
+  <main>
+    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+      <div id="container-start-recording" class="container py-10 px-10 mx-0 min-w-full flex flex-col items-center hidden">
+        <button id="button-start-recording" class="inline-flex items-center justify-center w-40 h-40 mr-2 p-7 text-pink-100 transition-colors duration-150 bg-pink-700 rounded-full focus:shadow-outline hover:bg-pink-800">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-40 w-40" enable-background="new 0 0 141.732 141.732" height="141.732px" id="Livello_1" viewBox="0 0 141.732 141.732" fill="currentColor" stroke="currentColor">
+            <g id="Livello_7"><path d="M91.192,59.623V21.946c0.043-0.534,0.068-1.073,0.068-1.618C91.262,9.102,82.161,0,70.935,0   c-11.229,0-20.33,9.104-20.33,20.328c0,0.545,0.024,1.084,0.066,1.618v37.677c-0.042,0.535-0.066,1.073-0.066,1.621   c0,11.229,9.103,20.326,20.329,20.326c11.227,0,20.327-9.1,20.327-20.326C91.262,60.696,91.235,60.158,91.192,59.623    M120.942,50.219c0-3.084-2.5-5.584-5.584-5.584c-3.082,0-5.582,2.5-5.582,5.584c0,0.047,0.004,0.092,0.008,0.139   c-0.076,21.43-17.471,38.779-38.917,38.779c-21.448,0-38.842-17.353-38.917-38.779c0.002-0.047,0.008-0.092,0.008-0.139   c0-3.084-2.5-5.584-5.584-5.584s-5.585,2.5-5.585,5.584c0,25.714,19.388,46.896,44.339,49.743v28.648H38.78   c-2.96,0-5.358,2.402-5.358,5.361c0,2.961,2.398,5.355,5.358,5.355h26.35h11.61h26.35c2.959,0,5.357-2.396,5.357-5.355   c0-2.959-2.398-5.361-5.357-5.361h-26.35V99.945C101.628,97.039,120.942,75.885,120.942,50.219"/></g><g id="Livello_1_1_"/>
+          </svg>
+        </button>
+      </div>
+      <div id="container-stop-recording" class="container py-10 px-10 mx-0 min-w-full flex flex-col items-center hidden">
+        <button id="button-stop-recording" class="inline-flex items-center justify-center w-40 h-40 mr-2 p-7 text-pink-100 transition-colors duration-150 bg-pink-700 rounded-full focus:shadow-outline hover:bg-pink-800">
+          <svg class="h-40 w-40"  data-name="Layer 1" id="Layer_1" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke="currentColor">
+            <rect height="298.98" rx="18.8" width="298.96" x="106.52" y="106.51"/>
+          </svg>
+        </button>
+      </div>
+      <div id="container-loading" class="container py-10 px-10 mx-0 min-w-full flex flex-col items-center hidden">
+        <button id="button-loading" class="inline-flex items-center justify-center w-40 h-40 mr-2 p-7 text-pink-100 transition-colors duration-150 bg-pink-700 rounded-full focus:shadow-outline">
+          <svg class="h-40 w-40 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+          </svg>
+        </button>
+      </div>
+
+      <div id="match-text" class="mt-10 mb-20 text-5xl font-semibold text-center tracking-wide"></div>
+
+      <div id="match-table" class="flex flex-col hidden">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+            <div class="overflow-hidden">
+              <table class="min-w-full text-left text-lg font-light">
+                <thead class="border-b font-medium dark:border-neutral-500">
+                  <tr id="match-table-header">
+                    <th scope="col" class="px-6 py-4">#</th>
+                    <th scope="col" class="px-6 py-4">First</th>
+                    <th scope="col" class="px-6 py-4">Last</th>
+                    <th scope="col" class="px-6 py-4">Handle</th>
+                  </tr>
+                </thead>
+                <tbody id="match-table-body">
+                  <tr class="border-b dark:border-neutral-500">
+                    <td class="whitespace-nowrap px-6 py-4">1</td>
+                    <td class="whitespace-nowrap px-6 py-4">Mark</td>
+                    <td class="whitespace-nowrap px-6 py-4">Otto</td>
+                    <td class="whitespace-nowrap px-6 py-4">@mdo</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<template id="match-table-template-header-cell">
+  <th scope="col" class="px-6 py-4">#</th>
+</template>
+
+<template id="match-table-body-template-row">
+  <tr class="border-b dark:border-neutral-500">
+  </tr>
+</template>
+
+<template id="match-table-body-template-row-cell">
+  <td class="whitespace-nowrap px-6 py-4">1</td>
+</template>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.0.7/RecordRTC.js"></script>
+<script>
+  const isEdge = navigator.userAgent.indexOf('Edge') !== -1 && (!!navigator.msSaveOrOpenBlob || !!navigator.msSaveBlob);
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+  //idle, recording, loading
+  let mimeType = "audio/wav";
+  let state;
+  let stream;
+  let recorder;
+  let audioBlob;
+
+  changeState("idle");
+  document.getElementById("button-start-recording").addEventListener("click", async (e) => {
+    await startRecording();
+  });
+
+  document.getElementById("button-stop-recording").addEventListener("click", async (e) => {
+    stopRecording();
+  });
+  
+  function changeState(newState) {
+    if(newState === "idle") {
+      document.getElementById("container-start-recording").classList.remove('hidden');
+      document.getElementById("container-stop-recording").classList.add('hidden');
+      document.getElementById("container-loading").classList.add('hidden');
+    } else if(newState === "recording") {
+      document.getElementById("container-start-recording").classList.add('hidden');
+      document.getElementById("container-stop-recording").classList.remove('hidden');
+      document.getElementById("container-loading").classList.add('hidden');
+    } else if(newState === "loading") {
+      document.getElementById("container-start-recording").classList.add('hidden');
+      document.getElementById("container-stop-recording").classList.add('hidden');
+      document.getElementById("container-loading").classList.remove('hidden');
+    } else {
+      console.error("Invalid state: " + newState);
+    }
+
+    state = newState;
+  }
+
+  function updateProcessRecordingResponse(response) {
+    if(response && response.text) {
+      document.getElementById("match-text").innerHTML = response.text;
+    } else {
+      document.getElementById("match-text").innerHTML = "";
+    }
+    if(response && response.matches) {
+      document.getElementById("match-table").classList.remove('hidden');
+      
+      let matchTableHeader = document.getElementById("match-table-header");
+      matchTableHeader.innerHTML = '';
+
+      let matchTableBody = document.getElementById("match-table-body");
+      matchTableBody.innerHTML = '';
+
+      let matchTableTemplateHeaderCell = document.getElementById("match-table-template-header-cell");
+      let matchTableBodyTemplateRow = document.getElementById("match-table-body-template-row");
+      let matchTableBodyTemplateRowCell = document.getElementById("match-table-body-template-row-cell");
+
+      const clone1 = matchTableBodyTemplateRow.content.cloneNode(true);
+      for ([key, value] of Object.entries(response.matches)) {
+        const clone = matchTableTemplateHeaderCell.content.cloneNode(true);
+        clone.children[0].innerHTML = key;
+        matchTableHeader.appendChild(clone);
+
+        const clone2 = matchTableBodyTemplateRowCell.content.cloneNode(true);
+        clone2.children[0].innerHTML = value;
+        clone1.children[0].appendChild(clone2);
+      }
+      matchTableBody.appendChild(clone1);
+    } else {
+      document.getElementById("match-table").classList.add('hidden');
+    }
+  
+  }
+
+  async function getMicrophonePermission() {
+    if(typeof navigator.mediaDevices === 'undefined' || !navigator.mediaDevices.getUserMedia) {
+      alert('This browser does not supports WebRTC getUserMedia API.');
+
+      if(!!navigator.getUserMedia) {
+          alert('This browser seems supporting deprecated getUserMedia API.');
+      }
+      return;
+    }
+    try {
+      if(stream) {
+        stream.stop();
+        stream = null;
+      }
+
+      const streamData = await navigator.mediaDevices.getUserMedia({
+        audio: true,
+        video: false,
+      });
+      stream = streamData;
+    } catch (error) {
+      console.error("Error occured in getMicrophonePermission" + error);
+      return;
+    }
+  }
+
+  async function startRecording() {
+    //create new Media recorder instance using the stream
+    if (!stream) {
+      await getMicrophonePermission();
+      if(!stream) {
+        console.error("Error getting stream!");
+        return;
+      }
+    }
+
+    var options = {
+        type: 'audio',
+        numberOfAudioChannels: 2
+    };
+
+    if(recorder) {
+        recorder.destroy();
+        recorder = null;
+    }
+
+    recorder = RecordRTC(stream, options);
+    recorder.startRecording();
+
+    changeState("recording");
+  }
+
+  function stopRecording() {
+    //stops the recording instance
+    if (!recorder) {
+      console.error("Recorder is missing in stopRecording!");
+      return;
+    }
+
+    changeState("loading");
+    
+    recorder.stopRecording(stopRecordingCallback);
+  }
+
+  async function stopRecordingCallback() {
+    audioBlob = recorder.getBlob();
+
+    try {
+      let processRecordingResponse = await postFile("/process-recording", audioBlob);
+      console.log(processRecordingResponse);
+      updateProcessRecordingResponse(processRecordingResponse);
+    } catch(error) {
+      console.error("Error occured in stopRecordingCallback" + error);
+      updateProcessRecordingResponse(null);
+    }
+    if(recorder) {
+      recorder = null;
+    }
+
+    if(stream) {
+      stream.getTracks().forEach((track) => {
+        track.stop();
+      });
+      stream = null;
+    }
+    changeState("idle");
+  }
+
+  async function postFile(url, fileBlob) {
+    var data = new FormData();
+    data.append('file', fileBlob, 'audio.wav');
+
+    let fetchOptions = {
+      method: "POST",
+      body: data
+    };
+
+    let res = await fetch(url, fetchOptions);
+
+    if (!res.ok) {
+        let error = await res.text();
+        throw new Error(error);
+    }
+
+    return res.json();
+  }
+</script>
+</body>
+</html>
