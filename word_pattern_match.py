@@ -1,22 +1,29 @@
 import copy
 import re
 import typing
-from enum import Enum
 
 from Levenshtein import distance
-
-
-class FuzzyMatchingAlgorithm(Enum):
-    LEVENSHTEIN_DISTANCE = 1
+import cologne_phonetics
 
 
 class FuzzyMatchingConfig:
-    def __init__(self, algorithm: FuzzyMatchingAlgorithm, max_distance: int = 3, insertion_weight: int = 1, deletion_weight: int = 1, substitution_weight: int = 1):
-        self.algorithm = algorithm
+    def __init__(self):
+        pass
+
+
+class LevenshteinDistanceConfig(FuzzyMatchingConfig):
+    def __init__(self, max_distance: int = 3, insertion_weight: int = 1, deletion_weight: int = 1, substitution_weight: int = 1):
+        super(LevenshteinDistanceConfig, self).__init__()
         self.max_distance = max_distance
         self.insertion_weight = insertion_weight
         self.deletion_weight = deletion_weight
         self.substitution_weight = substitution_weight
+
+
+class ColognePhoneticsConfig(FuzzyMatchingConfig):
+    def __init__(self, fuzzy_match_config_for_phonetics: LevenshteinDistanceConfig):
+        super(ColognePhoneticsConfig, self).__init__()
+        self.levenshtein_distance_config = fuzzy_match_config_for_phonetics
 
 
 class PatternConfig:
@@ -187,8 +194,8 @@ def handle_iterate_words(work: typing.Callable[[str], HandleIterateWordsWorkResu
         return result
 
 
-def fuzzy_match_score(text, target_text, config: FuzzyMatchingConfig) -> int:
-    if config.algorithm == FuzzyMatchingAlgorithm.LEVENSHTEIN_DISTANCE:
+def fuzzy_match_score(text: str, target_text: str, config: FuzzyMatchingConfig) -> int:
+    if isinstance(config, LevenshteinDistanceConfig):
         return config.max_distance - distance(
             text.lower(),
             target_text.lower(),
@@ -198,11 +205,20 @@ def fuzzy_match_score(text, target_text, config: FuzzyMatchingConfig) -> int:
                 config.substitution_weight
             )
         )
-    return False
+    elif isinstance(config, ColognePhoneticsConfig):
+        text_phonetics = "".join([str(e[1]) for e in cologne_phonetics.encode(re.sub("\\d", "x", text))])
+        target_text_phonetics = "".join([str(e[1]) for e in cologne_phonetics.encode(re.sub("\\d", "x", target_text))])
+        # print("     text: \"" + text + "\" phonetics: " + str(text_phonetics))
+        # print("     target_text: \"" + target_text + "\" phonetics: " + str(target_text_phonetics))
+        return fuzzy_match_score(text_phonetics, target_text_phonetics, config.levenshtein_distance_config)
+
+    return -9999
 
 
 def fuzzy_match(text, target_text, config: FuzzyMatchingConfig) -> bool:
-    return fuzzy_match_score(text, target_text, config) >= 0
+    score = fuzzy_match_score(text, target_text, config)
+    # print("target_text=\"" + target_text + "\" text=\"" + text + "\"  score=" + str(score))
+    return score >= 0
 
 
 def pattern_matcher(pointer: WordBufferPointer, config: PatternConfig, matches: dict[str, str]) -> bool:
@@ -243,6 +259,8 @@ def single_pattern_matcher(pointer: WordBufferPointer, config: SinglePatternConf
             if match is not None and match.string == text:
                 r = match.string
 
+        # print("Match result for \"" + str(config.string) + "\" r=" + str(r))
+
         return HandleIterateWordsWorkResult(
             result=r,
             end_iteration=r is not None
@@ -282,8 +300,11 @@ def closest_fuzzy_pattern_algorithm(pointer: WordBufferPointer, config: ClosestF
     most_matching_pair: typing.Optional[(HandleIterateWordsResultPair, str)] = None
     for string in config.string_list:
         def work1(text) -> HandleIterateWordsWorkResult:
-            score = fuzzy_match_score(text, string, config.fuzzy_matching)
-            #print(f"string=\"{string}\" text=\"{text}\" score={score}")
+            if len(text) == 0:
+                score = -1000
+            else:
+                score = fuzzy_match_score(text, string, config.fuzzy_matching)
+            # print(f"string=\"{string}\" text=\"{text}\" score={score}")
             return HandleIterateWordsWorkResult(
                 result=score,
                 end_iteration=False
@@ -306,6 +327,7 @@ def closest_fuzzy_pattern_algorithm(pointer: WordBufferPointer, config: ClosestF
 
 
 def pattern_match(pattern_config: PatternConfig, value: str) -> typing.Optional[dict[str, str]]:
+    print("Finding match for \"" + value + "\"")
     word_buffer = WordBuffer()
     word_buffer.insert(value)
     matches = {}
@@ -313,4 +335,5 @@ def pattern_match(pattern_config: PatternConfig, value: str) -> typing.Optional[
     if result:
         return matches
     else:
+        print("Failed matches: " + str(matches))
         return None
