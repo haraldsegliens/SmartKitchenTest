@@ -2,14 +2,14 @@ import json
 import os
 import sys
 
-from typing import Annotated
-
 import aiofiles
 import asyncio
 import uvicorn
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from flaskwebgui import FlaskUI
-from starlette.responses import FileResponse
+from starlette.responses import FileResponse, Response
+from fastapi import responses
+from starlette.status import HTTP_204_NO_CONTENT
 
 from hardcoded_data import form_storage, pattern_match_config
 from word_pattern_match import pattern_match
@@ -66,6 +66,28 @@ async def read_forms_data(form_index: int):
         "columns": form.get_form_columns(),
         "records": json.loads(form.data_frame.to_json(orient="records"))
     }
+
+
+@app.get("/data/forms/{form_index}/download_excel")
+async def download_excel_from_forms_data(form_index: int):
+    if form_index >= len(form_storage.forms):
+        raise HTTPException(status_code=400, detail="Form with index " + str(form_index) + " not found!")
+
+    form = form_storage.forms[form_index]
+    form.data_frame.to_excel("temp.xlsx")
+
+    return responses.FileResponse("temp.xlsx", filename=form.name + ".xlsx")
+
+
+@app.delete("/data/forms/{form_index}")
+async def clear_form_data(form_index: int):
+    if form_index >= len(form_storage.forms):
+        raise HTTPException(status_code=400, detail="Form with index " + str(form_index) + " not found!")
+
+    form = form_storage.forms[form_index]
+    form.data_frame.drop(form.data_frame.index, inplace=True)
+
+    return Response(status_code=HTTP_204_NO_CONTENT)
 
 
 @app.post("/process-recording")

@@ -71,11 +71,8 @@ pattern_match_config = OneOfPatternConfig(
                 ),
                 ClosestFuzzyPatternConfig(
                     name="svars, mērvienība",
-                    fuzzy_matching=LevenshteinDistanceConfig(
-                        max_distance=3,
-                        insertion_weight=1,
-                        deletion_weight=5,
-                        substitution_weight=5
+                    fuzzy_matching=ColognePhoneticsConfig(
+                        fuzzy_match_config_for_phonetics=LevenshteinDistanceConfig()
                     ),
                     iterate_words_from=1,
                     iterate_words_to=2,
@@ -171,11 +168,8 @@ pattern_match_config = OneOfPatternConfig(
                 ),
                 ClosestFuzzyPatternConfig(
                     name="svars, mērvienība",
-                    fuzzy_matching=LevenshteinDistanceConfig(
-                        max_distance=3,
-                        insertion_weight=1,
-                        deletion_weight=5,
-                        substitution_weight=5
+                    fuzzy_matching=ColognePhoneticsConfig(
+                        fuzzy_match_config_for_phonetics=LevenshteinDistanceConfig()
                     ),
                     iterate_words_from=1,
                     iterate_words_to=2,

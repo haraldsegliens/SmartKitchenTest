@@ -92,17 +92,18 @@ def transcribe_audio(audio_path, task="transcribe", return_timestamps=False):
 
 
 def main():
-    print(json.dumps(pattern_match(pattern_match_config, "Bojāts produkts lielop karbonādu 1,32 kg Haralds"), indent=2, ensure_ascii=False))
-    print(json.dumps(pattern_match(pattern_match_config, "Bojāts produkts lielop karbonādu 1,32 kg h"), indent=2, ensure_ascii=False))
-    print(json.dumps(pattern_match(pattern_match_config, "Bojāts produkts piens 2 litri haralds"), indent=2, ensure_ascii=False))
-    print(json.dumps(pattern_match(pattern_match_config, " Bojāts produkts lielopu karbonātu 1,32 kg Haralds."), indent=2, ensure_ascii=False))
-    print(json.dumps(pattern_match(pattern_match_config, "Bojāts produkts piens divi litri haralds."), indent=2, ensure_ascii=False))
-    print(json.dumps(pattern_match(pattern_match_config, "Bojāts produkts piens divsimt litri haralds."), indent=2, ensure_ascii=False))
-    print(json.dumps(pattern_match(pattern_match_config, "Bojāts produkts 500 l Haralds"), indent=2, ensure_ascii=False))
-    print(json.dumps(pattern_match(pattern_match_config, "Bojāts produkts 5,9 kg."), indent=2, ensure_ascii=False))
-    print(json.dumps(pattern_match(pattern_match_config, "Bojots produkts olija veļa 10 litru Haralds."), indent=2, ensure_ascii=False))
-    print(json.dumps(pattern_match(pattern_match_config, "Bojāts produkts olīvēļa 5 litru harauti."), indent=2, ensure_ascii=False))
-    print(json.dumps(pattern_match(pattern_match_config, "Bojāts produkts tolik vēļa 2 litri harāls."), indent=2, ensure_ascii=False))
+    # print(json.dumps(pattern_match(pattern_match_config, "Bojāts produkts lielop karbonādu 1,32 kg Haralds"), indent=2, ensure_ascii=False))
+    # print(json.dumps(pattern_match(pattern_match_config, "Bojāts produkts lielop karbonādu 1,32 kg h"), indent=2, ensure_ascii=False))
+    # print(json.dumps(pattern_match(pattern_match_config, "Bojāts produkts piens 2 litri haralds"), indent=2, ensure_ascii=False))
+    # print(json.dumps(pattern_match(pattern_match_config, " Bojāts produkts lielopu karbonātu 1,32 kg Haralds."), indent=2, ensure_ascii=False))
+    # print(json.dumps(pattern_match(pattern_match_config, "Bojāts produkts piens divi litri haralds."), indent=2, ensure_ascii=False))
+    # print(json.dumps(pattern_match(pattern_match_config, "Bojāts produkts piens divsimt litri haralds."), indent=2, ensure_ascii=False))
+    # print(json.dumps(pattern_match(pattern_match_config, "Bojāts produkts 500 l Haralds"), indent=2, ensure_ascii=False))
+    # print(json.dumps(pattern_match(pattern_match_config, "Bojāts produkts 5,9 kg."), indent=2, ensure_ascii=False))
+    # print(json.dumps(pattern_match(pattern_match_config, "Bojots produkts olija veļa 10 litru Haralds."), indent=2, ensure_ascii=False))
+    # print(json.dumps(pattern_match(pattern_match_config, "Bojāts produkts olīvēļa 5 litru harauti."), indent=2, ensure_ascii=False))
+    # print(json.dumps(pattern_match(pattern_match_config, "Bojāts produkts tolik vēļa 2 litri harāls."), indent=2, ensure_ascii=False))
+    print(json.dumps(pattern_match(pattern_match_config, "Atlikumu uzskaita oliju vēļa 10 līdzi."), indent=2, ensure_ascii=False))
 
 
 if __name__ == '__main__':

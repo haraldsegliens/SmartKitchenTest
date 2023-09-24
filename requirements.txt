@@ -14,3 +14,4 @@ Levenshtein
 pyinstaller
 auto-py-to-exe
 gradio-client>=0.5.1
+openpyxl

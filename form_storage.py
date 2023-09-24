@@ -16,7 +16,7 @@ class Form:
         self.form_keyword_attribute = form_keyword_attribute
         self.form_columns = form_columns
         self.datetime_field = datetime_field
-        self.data_frame = DataFrame(columns=self.get_form_columns())
+        self.data_frame: DataFrame = DataFrame(columns=self.get_form_columns())
 
     def get_form_columns(self):
         data_frame_columns = [form_column for form_column in self.form_columns]
